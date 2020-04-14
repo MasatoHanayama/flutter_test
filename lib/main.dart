@@ -101,19 +101,14 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              decoration: InputDecoration(hintText: 'Enter the schedule title', labelText: 'Enter the schedule title'),
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Column(children: <Widget>[
+                TextField(decoration: InputDecoration(hintText: 'Enter the schedule title', labelText: 'Enter the schedule title'),),
+                TextField(decoration: InputDecoration(hintText: 'Enter the place', labelText: 'Enter the place'),),
+                
+              ],)
             ),
-            TextField(
-              decoration: InputDecoration(hintText:' Enter the place', labelText: 'Enter the place'),
-            ),
-            // Text(
-            //   'You have pushed the button this many times:',
-            // ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
           ],
         ),
       ),
