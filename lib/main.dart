@@ -54,16 +54,48 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  TimeOfDay _startTime = TimeOfDay.fromDateTime(DateTime.now());
+  TimeOfDay _endTime = TimeOfDay.fromDateTime(DateTime.now());
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
+      // This call to setSTTtate tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  // String get _labelText{
+  //   return _fromTime.format(context);
+  // }
+
+  String get _startTimeText{
+    return _startTime.format(context);
+  }
+
+  String get _endTimeText{
+    return _endTime.format(context);
+  }
+
+  Future<void> _showTimePicker(String startOrEnd) async{
+    final picked = await showTimePicker(
+      context: context,
+      // initialTime: _fromTime,
+      initialTime: startOrEnd == 'start' ? _startTime : _endTime,
+    );
+    if(picked != null && picked != (startOrEnd == 'start' ? _startTime : _endTime)){
+      setState(() {
+        // _fromTime = picked;
+        if(startOrEnd == 'start'){
+          _startTime = picked;
+        }
+        else{
+          _endTime = picked;
+        }
+      });
+    }
   }
 
   @override
@@ -106,7 +138,22 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(children: <Widget>[
                 TextField(decoration: InputDecoration(hintText: 'Enter the schedule title', labelText: 'Enter the schedule title'),),
                 TextField(decoration: InputDecoration(hintText: 'Enter the place', labelText: 'Enter the place'),),
-                
+                Row(children: <Widget>[
+                  GestureDetector(
+                    onTap: (){
+                      // print('ontap');
+                      _showTimePicker('start');
+                    },
+                    child: Text('Start Time: ' + _startTimeText),
+                  ),
+                  Text(' ~ '),
+                  GestureDetector(
+                    onTap: (){
+                      _showTimePicker('end');
+                    },
+                    child: Text('End Time: ' + _endTimeText),
+                  ),
+                ]),
               ],)
             ),
           ],
