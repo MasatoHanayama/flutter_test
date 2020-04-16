@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './AddFormWidget.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Add Schedule'),
+      // home: MyHomePage(title: 'Add Schedule at April 23'),
+      home: MyHomePage(title: '4月23日の予定を追加')
     );
   }
 }
@@ -68,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AddFormWidget addFormWidget = new AddFormWidget();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -104,9 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: EdgeInsets.all(20.0),
               child: Column(children: <Widget>[
-                TextField(decoration: InputDecoration(hintText: 'Enter the schedule title', labelText: 'Enter the schedule title'),),
-                TextField(decoration: InputDecoration(hintText: 'Enter the place', labelText: 'Enter the place'),),
-                
+                TextField(decoration: InputDecoration(hintText: '予定のタイトルを入力してください。', labelText: '予定タイトル'),),
+                // TextField(decoration: InputDecoration(hintText: 'Enter the place', labelText: 'Enter the place'),),
+                ListView(children: [Text('本社8F研修室'), Text('本社8F会議室')],),
+                Row(children: <Widget>[
+                  // Icon(Icons.access_time, size: 20),
+                  Icon(Icons.access_time),
+                  Text(" Start Time "),
+                  Text("00:00"),
+                  Text(" ~ End Time "),
+                  Text("00:00"),
+                ]),
               ],)
             ),
           ],
@@ -114,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        tooltip: 'Add',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
